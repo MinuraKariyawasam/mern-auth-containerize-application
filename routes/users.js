@@ -15,25 +15,12 @@ router.get('/user', async function(req, res, next) {
 
 router.get('/user/:username', async function(req, res, next) {
     const username = req.params.username;
-    var resultArray = [];
-    var id;
     try{
-      const result = await User.find();
-      for(var i in result)
-        resultArray.push([i, result [i]]);
-      console.log(result);
-      for(var i = 0; i < resultArray.length; i++){
-        if(resultArray[i].username = username){
-           id = resultArray[i]._id 
-        }
-      }
-      console.log(id);
-      // const setResult = await User.findById(id);
-    }catch (err){
+      const result = await User.find({"username": username});
+      res.send(result);
+    }catch (err) {
       console.log(err.message);
     }
-    
-    
 });
 
 router.post('/user', async function(req, res, next) {
